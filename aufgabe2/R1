@@ -1,0 +1,129 @@
+Current configuration : 1525 bytes
+!
+! Last configuration change at 13:02:42 UTC Mon Jan 2 2006
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$dXQd$xwn8LnO9xjFR.3OICqKcc1
+!
+no aaa new-model
+!
+memory-size iomem 25
+dot11 syslog
+ip source-route
+!
+!
+!
+!
+!
+ip cef
+no ip domain lookup
+ip domain name bestegruppe.4ahit
+login block-for 180 attempts 4 within 120
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2801 sn FCZ111623BK
+username MANAGEMENT secret 5 $1$n.WI$cKWqNY6sgv0E1s8vPp14l.
+!
+redundancy
+!
+!
+ip ssh version 1
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ shutdown
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:BEEF:1::1/64
+!
+interface FastEthernet0/1
+ ip address 172.16.0.25 255.255.255.248
+ shutdown
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:AFFE::1/64
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+banner motd ^CCHallo^C
+!
+line con 0
+ password 7 1511021F0725
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ login
+ transport input all
+line vty 5 15
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+end
