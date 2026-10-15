@@ -6,7 +6,7 @@
     service timestamps log datetime msec
     service password-encryption
     !
-    hostname R1
+    hostname ISP
     !
     boot-start-marker
     boot-end-marker
