@@ -1,6 +1,7 @@
-Current configuration : 1523 bytes
+
+Current configuration : 1648 bytes
 !
-! Last configuration change at 12:20:12 UTC Mon Jan 2 2006
+! Last configuration change at 13:02:28 UTC Mon Jan 2 2006
 version 15.1
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -86,6 +87,13 @@ interface Serial0/1/1
  shutdown
  clock rate 2000000
 !
+router ospf 2
+!
+router ospf 1
+ router-id 1.1.1.1
+ network 172.16.0.24 0.0.0.7 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+!
 ip forward-protocol nd
 !
 !
@@ -105,7 +113,7 @@ control-plane
 !
 !
 mgcp profile default
-!
+!         
 !
 !
 !
