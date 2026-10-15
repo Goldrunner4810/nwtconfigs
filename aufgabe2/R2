@@ -1,9 +1,6 @@
-Building configuration...
-
-
-Current configuration : 1575 bytes
+Current configuration : 1876 bytes
 !
-! Last configuration change at 12:50:24 UTC Mon Jan 2 2006
+! Last configuration change at 13:18:02 UTC Mon Jan 2 2006
 version 15.1
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -89,12 +86,24 @@ interface Serial0/1/1
  shutdown
  clock rate 2000000
 !
+router ospf 1
+ router-id 1.1.1.2
+ network 172.16.0.24 0.0.0.7 area 0
+ network 192.168.0.12 0.0.0.3 area 0
+ network 198.51.100.12 0.0.0.3 area 0
+ default-information originate
+!
 ip forward-protocol nd
 !
 !
 no ip http server
 no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 198.51.100.13
 !
+!
+ipv6 route ::/0 2001:DB8:F1F1::1
+ipv6 router ospf 1
+ default-information originate
 !
 !
 !

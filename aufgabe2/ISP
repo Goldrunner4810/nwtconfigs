@@ -1,6 +1,6 @@
-Current configuration : 1284 bytes
+Current configuration : 1575 bytes
 !
-! Last configuration change at 12:04:27 UTC Mon Jan 2 2006
+! Last configuration change at 12:52:14 UTC Mon Jan 2 2006
 version 15.1
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -20,7 +20,7 @@ memory-size iomem 25
 dot11 syslog
 ip source-route
 !
-!         
+!
 !
 !
 !
@@ -43,7 +43,7 @@ vtp mode transparent
 redundancy
 !
 !
-!         
+!
 !
 !
 !
@@ -68,18 +68,26 @@ interface FastEthernet0/1
 interface Serial0/0/0
  ip address 198.51.100.13 255.255.255.252
  ipv6 address 2001:DB8:F1F1::1/64
- clock rate 128000
 !
 interface Serial0/0/1
  no ip address
  shutdown
+!
+router ospf 1
+ router-id 1.1.1.67
+ network 198.51.100.12 0.0.0.3 area 0
 !
 ip forward-protocol nd
 no ip http server
 no ip http secure-server
 !
 !
+ip route 172.16.0.0 255.255.240.0 198.51.100.14
+ip route 192.168.0.0 255.255.0.0 198.51.100.14
 !
+ipv6 route 2001:DB8:AFFE::/64 2001:DB8:F1F1::2
+ipv6 route 2001:DB8:BEEF::/48 2001:DB8:F1F1::2
+ipv6 route 2001:DB8:CAFE::/64 2001:DB8:F1F1::2
 !
 !
 !
@@ -89,9 +97,6 @@ no ip http secure-server
 control-plane
 !
 !
- --More-- 
-Jan  2 12:32:02.067: %LINK-3-UPDOWN: Interface Serial0/0/0, changed state to up
-Jan  2 12:32:03.067: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed state to up
 banner motd ^CCHallo^C
 !
 line con 0
