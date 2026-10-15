@@ -1,6 +1,7 @@
-Current configuration : 1525 bytes
+
+Current configuration : 1523 bytes
 !
-! Last configuration change at 13:02:42 UTC Mon Jan 2 2006
+! Last configuration change at 12:03:35 UTC Mon Jan 2 2006
 version 15.1
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -20,7 +21,7 @@ memory-size iomem 25
 dot11 syslog
 ip source-route
 !
-!
+!         
 !
 !
 !
@@ -28,7 +29,8 @@ ip cef
 no ip domain lookup
 ip domain name bestegruppe.4ahit
 login block-for 180 attempts 4 within 120
-no ipv6 cef
+ipv6 unicast-routing
+ipv6 cef
 !
 multilink bundle-name authenticated
 !
@@ -42,20 +44,20 @@ multilink bundle-name authenticated
 !
 !
 voice-card 0
-!
+!         
 crypto pki token default removal timeout 0
 !
 !
 !
 !
 license udi pid CISCO2801 sn FCZ111623BK
-username MANAGEMENT secret 5 $1$n.WI$cKWqNY6sgv0E1s8vPp14l.
+username MANAGEMENT secret 5 $1$guxx$/g6il7uSzThz6aDd7TLHQ0
 !
 redundancy
 !
 !
-ip ssh version 1
-!
+ip ssh version 2
+! 
 !
 !
 !
@@ -65,14 +67,12 @@ ip ssh version 1
 !
 interface FastEthernet0/0
  ip address 192.168.1.1 255.255.255.0
- shutdown
  duplex auto
  speed auto
  ipv6 address 2001:DB8:BEEF:1::1/64
 !
 interface FastEthernet0/1
  ip address 172.16.0.25 255.255.255.248
- shutdown
  duplex auto
  speed auto
  ipv6 address 2001:DB8:AFFE::1/64
