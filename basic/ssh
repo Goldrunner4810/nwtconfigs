@@ -4,7 +4,7 @@ crypto key generate rsa
 login block-for 180 attempts 4 within 120
 username MANAGEMENT secret cisco
 ip ssh version 2
-line vty 5 15
+line vty 0 15
  login local
  transport input ssh
  exit

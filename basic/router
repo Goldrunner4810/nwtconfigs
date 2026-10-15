@@ -61,13 +61,11 @@
     !
     interface FastEthernet0/0
      no ip address
-     shutdown
      duplex auto
      speed auto
     !
     interface FastEthernet0/1
      no ip address
-     shutdown
      duplex auto
      speed auto
     !
