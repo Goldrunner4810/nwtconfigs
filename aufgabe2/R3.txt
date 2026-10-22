@@ -1,6 +1,6 @@
-Current configuration : 1691 bytes
+Current configuration : 1996 bytes
 !
-! Last configuration change at 13:04:30 UTC Mon Jan 2 2006
+! Last configuration change at 12:30:21 UTC Mon Jan 2 2006
 version 15.1
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -66,12 +66,21 @@ ip ssh version 2
 !
 interface FastEthernet0/0
  ip address 192.168.2.1 255.255.255.0
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 7 106D000A0618
+ ip ospf hello-interval 5
+ shutdown
  duplex auto
  speed auto
  ipv6 address 2001:DB8:BEEF:2::1/64
 !
 interface FastEthernet0/1
  ip address 172.16.0.27 255.255.255.248
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 7 123A0C041104
+ ip ospf hello-interval 5
+ ip ospf priority 0
+ shutdown
  duplex auto
  speed auto
  ipv6 address 2001:DB8:AFFE::3/64
@@ -80,7 +89,7 @@ interface Serial0/1/0
  no ip address
  shutdown
  clock rate 2000000
-!
+!         
 interface Serial0/1/1
  no ip address
  shutdown
@@ -88,6 +97,7 @@ interface Serial0/1/1
 !
 router ospf 1
  router-id 1.1.1.3
+ auto-cost reference-bandwidth 4000
  network 172.16.0.24 0.0.0.7 area 0
  network 192.168.2.0 0.0.0.255 area 0
 !
@@ -102,7 +112,7 @@ ip route 0.0.0.0 0.0.0.0 203.0.113.1
 !
 !
 !
-!
+!         
 !
 !
 control-plane
@@ -112,11 +122,11 @@ control-plane
 !
 mgcp profile default
 !
-!         
 !
 !
 !
-banner motd ^CAuthorized access only^C
+!
+banner motd ^CCAuthorized access only^C
 !
 line con 0
  password 7 1511021F0725
