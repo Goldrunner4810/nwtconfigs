@@ -15,23 +15,19 @@ enable secret 5 $1$ix7Z$thTmu1KhIb0QcUr/M4E1U.
 !
 username MANAGEMENT secret 5 $1$/M0M$uql5k975wh/A2Cvx1fNWv1
 !
-!
 no aaa new-model
 system mtu routing 1500
 ip routing
 no ip domain-lookup
 ip domain-name bestegruppe.4ahit
 !
-!
 login block-for 180 attempts 4 within 120
-!
 !
 crypto pki trustpoint TP-self-signed-1379749888
  enrollment selfsigned
  subject-name cn=IOS-Self-Signed-Certificate-1379749888
  revocation-check none
  rsakeypair TP-self-signed-1379749888
-!
 !
 crypto pki certificate chain TP-self-signed-1379749888
  certificate self-signed 01
@@ -56,16 +52,12 @@ crypto pki certificate chain TP-self-signed-1379749888
   44C8D5B3 8EBA0B88 999A8371 F8A31791
   quit
 !
-!
-!
 spanning-tree mode pvst
 spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
 !
 ip ssh version 2
-!
-!
 !
 interface FastEthernet0/1
  switchport access vlan 99
@@ -137,11 +129,6 @@ interface Vlan99
 ip classless
 ip http server
 ip http secure-server
-!
-!
-!
-!
-!
 !
 banner motd ^CCHallo^C
 !
