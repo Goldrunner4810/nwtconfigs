@@ -1,0 +1,183 @@
+S2#show run 
+Building configuration...
+
+Current configuration : 4259 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname S2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$mks3$6Wv0DTF90T6LdNofIGloz1
+!
+username MANAGEMENT secret 5 $1$FWDJ$b.BShuXC.LmG9I/dlbBcq.
+username maint secret 5 $1$vzax$U9lW5fm5IQ1UykyH2jfrn/
+!
+!
+no aaa new-model
+system mtu routing 1500
+no ip domain-lookup
+ip domain-name htl.local
+!
+!
+login block-for 120 attempts 3 within 60
+!
+!
+crypto pki trustpoint TP-self-signed-1379749888
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1379749888
+ revocation-check none
+ rsakeypair TP-self-signed-1379749888
+!
+!
+crypto pki certificate chain TP-self-signed-1379749888
+ certificate self-signed 01
+  30820244 308201AD A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333739 37343938 3838301E 170D3933 30333031 30303030 
+  35375A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 33373937 
+  34393838 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100B273 5AC2E311 F700432D DC7DE08A 49B04276 7631C4C1 5BBB74F9 21742A17 
+  960FA4FE 9C49C4F9 8C0764A2 234EFB60 74BFF63F 47CE9123 1CC83737 6B91C97D 
+  B0FC7330 C8C71F52 7185AF47 08033D0E C587DA52 C59D1C3E CA319F28 B9A685D4 
+  AC0D1DD9 2E8B101D 0E9F2802 35AD6E89 EDEE1F7A 415D20EE 0B3FDA6B 1690E751 
+  CED70203 010001A3 6C306A30 0F060355 1D130101 FF040530 030101FF 30170603 
+  551D1104 10300E82 0C53322E 68746C2E 6C6F6361 6C301F06 03551D23 04183016 
+  801436E3 F1DFAD5A 9C6A10B0 00848B2F E6E0292D A13D301D 0603551D 0E041604 
+  1436E3F1 DFAD5A9C 6A10B000 848B2FE6 E0292DA1 3D300D06 092A8648 86F70D01 
+  01040500 03818100 1CA1A8DD D7B2199E 09A1CAE3 41D84642 F587F795 00F00BF4 
+  E4708AB4 70139991 D74BAD47 073E937F 49EDAB3D 47FAF485 5B2A86B6 713FF945 
+  7C2318A2 6F3A8FDB 3583C7DE F0C4A2BD 0C315AB0 1D29AE46 A991949A 4FEFE26E 
+  4196F4EB AA0FB9F6 ECDB2151 FB733F85 22B5C976 92482BF1 95043663 482D7979 
+  9248196D 60A6B56F
+  quit
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!         
+interface FastEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,99,100
+ switchport mode trunk
+!
+interface FastEthernet0/2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,99,100
+ switchport mode trunk
+!
+interface FastEthernet0/3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,99,100
+ switchport mode trunk
+!
+interface FastEthernet0/4
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,99,100
+ switchport mode trunk
+!
+interface FastEthernet0/5
+ switchport access vlan 10
+ switchport mode access
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+ switchport access vlan 20
+ switchport mode access
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!         
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+ switchport access vlan 100
+ switchport mode access
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan99
+ ip address 172.16.4.2 255.255.255.0
+ ipv6 address 2001:DB8:AFFE:4::2/64
+!
+ip default-gateway 172.16.4.1
+ip classless
+ip http server
+ip http secure-server
+!
+!
+!
+!
+!
+!         
+banner motd ^C Unbefugter Zugriff verboten! ^C
+!
+line con 0
+ password 7 00071A150754
+ logging synchronous
+ login
+ history size 50
+line vty 0 4
+ logging synchronous
+ login local
+ history size 50
+ transport input ssh
+line vty 5 15
+ logging synchronous
+ login local
+ history size 50
+ transport input ssh
+!
+end
